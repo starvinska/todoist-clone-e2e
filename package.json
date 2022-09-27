@@ -12,6 +12,9 @@
     "react-icons": "^3.10.0",
     "react-scripts": "3.4.1"
   },
+  "engines": {
+    "node": "12.22.22"
+  },
   "devDependencies": {
     "@testing-library/react": "^10.3.0",
     "babel-eslint": "^10.1.0",
