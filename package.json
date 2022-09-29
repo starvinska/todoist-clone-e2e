@@ -12,11 +12,9 @@
     "react-scripts": "^5.0.1",
     "sass": "^1.55.0"
   },
-  "engines": {
-    "node": "12.22.22"
-  },
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "prettier": "^2.7.1"
   },
   "scripts": {
