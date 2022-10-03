@@ -67,8 +67,6 @@ export const useProjects = () => {
           docId: project.id,
         }));
 
-        console.log(allProjects)
-
         if (JSON.stringify(allProjects) !== JSON.stringify(projects)) {
           setProjects(allProjects);
         }
