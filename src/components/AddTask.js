@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa';
 import moment from 'moment';
 import PropTypes from 'prop-types';
+
 import { firebase } from '../firebase';
 import { useSelectedProjectValue } from '../context';
+
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
 
-export const AddTask = ({
-  showAddTaskMain = true,
-  shouldShowMain = false,
-  showQuickAddTask,
-  setShowQuickAddTask,
-}) => {
+export const AddTask = ({ showAddTaskMain = true, shouldShowMain = false, showQuickAddTask, setShowQuickAddTask }) => {
   const [task, setTask] = useState('');
   const [taskDate, setTaskDate] = useState('');
   const [project, setProject] = useState('');
@@ -55,10 +52,7 @@ export const AddTask = ({
   };
 
   return (
-    <div
-      className={showQuickAddTask ? 'add-task add-task__overlay' : 'add-task'}
-      data-testid="add-task-comp"
-    >
+    <div className={showQuickAddTask ? 'add-task add-task__overlay' : 'add-task'} data-testid="add-task-comp">
       {showAddTaskMain && (
         <div
           className="add-task__shallow"
@@ -111,11 +105,7 @@ export const AddTask = ({
             showProjectOverlay={showProjectOverlay}
             setShowProjectOverlay={setShowProjectOverlay}
           />
-          <TaskDate
-            setTaskDate={setTaskDate}
-            showTaskDate={showTaskDate}
-            setShowTaskDate={setShowTaskDate}
-          />
+          <TaskDate setTaskDate={setTaskDate} showTaskDate={showTaskDate} setShowTaskDate={setShowTaskDate} />
           <input
             className="add-task__content"
             aria-label="Enter your task"
@@ -128,11 +118,7 @@ export const AddTask = ({
             type="button"
             className="add-task__submit"
             data-testid="add-task"
-            onClick={() =>
-              showQuickAddTask
-                ? addTask() && setShowQuickAddTask(false)
-                : addTask()
-            }
+            onClick={() => (showQuickAddTask ? addTask() && setShowQuickAddTask(false) : addTask())}
           >
             Add Task
           </button>

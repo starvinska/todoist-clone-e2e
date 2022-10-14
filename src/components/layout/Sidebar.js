@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import {
-  FaChevronDown,
-  FaInbox,
-  FaRegCalendarAlt,
-  FaRegCalendar,
-} from 'react-icons/fa';
+import { FaChevronDown, FaInbox, FaRegCalendarAlt, FaRegCalendar } from 'react-icons/fa';
+
 import { Projects } from '../Projects';
 import { useSelectedProjectValue } from '../../context';
 import { AddProject } from '../AddProject';
@@ -17,10 +13,7 @@ export const Sidebar = () => {
   return (
     <div className="sidebar" data-testid="sidebar">
       <ul className="sidebar__generic">
-        <li
-          data-testid="inbox"
-          className={active === 'inbox' ? 'active' : undefined}
-        >
+        <li data-testid="inbox" className={active === 'inbox' ? 'active' : undefined}>
           <div
             data-testid="inbox-action"
             aria-label="Show inbox tasks"
@@ -43,10 +36,7 @@ export const Sidebar = () => {
             <span>Inbox</span>
           </div>
         </li>
-        <li
-          data-testid="today"
-          className={active === 'today' ? 'active' : undefined}
-        >
+        <li data-testid="today" className={active === 'today' ? 'active' : undefined}>
           <div
             data-testid="today-action"
             aria-label="Show today's tasks"
@@ -69,10 +59,7 @@ export const Sidebar = () => {
             <span>Today</span>
           </div>
         </li>
-        <li
-          data-testid="next_7"
-          className={active === 'next_7' ? 'active' : undefined}
-        >
+        <li data-testid="next_7" className={active === 'next_7' ? 'active' : undefined}>
           <div
             data-testid="next_7-action"
             aria-label="Show tasks for the next 7 days"
@@ -107,9 +94,7 @@ export const Sidebar = () => {
         tabIndex={0}
       >
         <span>
-          <FaChevronDown
-            className={!showProjects ? 'hidden-projects' : undefined}
-          />
+          <FaChevronDown className={!showProjects ? 'hidden-projects' : undefined} />
         </span>
         <h2>Projects</h2>
       </div>

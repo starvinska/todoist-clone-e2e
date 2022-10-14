@@ -3,12 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@mantine/core": "^5.5.5",
+    "@mantine/dates": "^5.5.5",
+    "@mantine/form": "^5.5.5",
+    "@mantine/hooks": "^5.5.5",
+    "@mantine/modals": "^5.5.5",
+    "@mantine/notifications": "^5.5.5",
+    "dayjs": "^1.11.5",
     "firebase": "^9.10.0",
     "moment": "^2.29.4",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
     "sass": "^1.55.0"
   },
@@ -16,13 +25,20 @@
     "@testing-library/react": "^13.4.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-jest": "^27.1.1",
+    "eslint-plugin-jest-dom": "4.0.2",
+    "eslint-plugin-react": "7.30.0",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-testing-library": "5.5.1",
     "prettier": "^2.7.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint:fix": "eslint --fix \"./src/**/*.{js,jsx}\" && echo \"lint success\""
   },
   "jest": {
     "collectCoverageFrom": [

@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+
 import { useSelectedProjectValue, useProjectsValue } from '../context';
+
 import { IndividualProject } from './IndividualProject';
 
 export const Projects = ({ activeValue = null }) => {
@@ -15,11 +17,7 @@ export const Projects = ({ activeValue = null }) => {
         key={project.projectId}
         data-testid="project-action-parent"
         data-doc-id={project.docId}
-        className={
-          active === project.projectId
-            ? 'active sidebar__project'
-            : 'sidebar__project'
-        }
+        className={active === project.projectId ? 'active sidebar__project' : 'sidebar__project'}
       >
         <div
           role="button"
