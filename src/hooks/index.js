@@ -4,12 +4,17 @@ import moment from 'moment';
 import { firebase } from '../firebase';
 import { collatedTasksExist } from '../helpers';
 
+import { useUser } from './useUser/useUser';
+
 export const useTasks = (selectedProject) => {
   const [tasks, setTasks] = useState([]);
   const [archivedTasks, setArchivedTasks] = useState([]);
+  const { user } = useUser();
 
   useEffect(() => {
-    let unsubscribe = firebase.firestore().collection('tasks').where('userId', '==', 'xD54Q3dGwp58SSim6ndf');
+    if (!user) return;
+
+    let unsubscribe = firebase.firestore().collection('tasks').where('userId', '==', user.uid);
 
     unsubscribe =
       selectedProject && !collatedTasksExist(selectedProject)
@@ -37,19 +42,22 @@ export const useTasks = (selectedProject) => {
     });
 
     return () => unsubscribe();
-  }, [selectedProject]);
+  }, [selectedProject, user.uid]);
 
   return { tasks, archivedTasks };
 };
 
 export const useProjects = () => {
   const [projects, setProjects] = useState([]);
+  const { user } = useUser();
 
   useEffect(() => {
+    if (!user) return;
+
     firebase
       .firestore()
       .collection('projects')
-      .where('userId', '==', 'xD54Q3dGwp58SSim6ndf')
+      .where('userId', '==', user?.uid)
       .orderBy('projectId')
       .get()
       .then((snapshot) => {
@@ -62,7 +70,7 @@ export const useProjects = () => {
           setProjects(allProjects);
         }
       });
-  }, [projects]);
+  }, [projects, user]);
 
   return { projects, setProjects };
 };

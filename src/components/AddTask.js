@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import { firebase } from '../firebase';
 import { useSelectedProjectValue } from '../context';
+import { useUser } from '../hooks/useUser/useUser';
 
 import { ProjectOverlay } from './ProjectOverlay';
 import { TaskDate } from './TaskDate';
@@ -16,6 +17,7 @@ export const AddTask = ({ showAddTaskMain = true, shouldShowMain = false, showQu
   const [showMain, setShowMain] = useState(shouldShowMain);
   const [showProjectOverlay, setShowProjectOverlay] = useState(false);
   const [showTaskDate, setShowTaskDate] = useState(false);
+  const { user } = useUser();
 
   const { selectedProject } = useSelectedProjectValue();
 
@@ -40,7 +42,7 @@ export const AddTask = ({ showAddTaskMain = true, shouldShowMain = false, showQu
           projectId,
           task,
           date: collatedDate || taskDate,
-          userId: 'xD54Q3dGwp58SSim6ndf',
+          userId: user.uid,
         })
         .then(() => {
           setTask('');

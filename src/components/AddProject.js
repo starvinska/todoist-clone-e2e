@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import { firebase } from '../firebase';
 import { generatePushId } from '../helpers';
 import { useProjectsValue } from '../context';
+import { useUser } from '../hooks/useUser/useUser';
 
 export const AddProject = ({ shouldShow = false }) => {
   const [show, setShow] = useState(shouldShow);
   const [projectName, setProjectName] = useState('');
+  const { user } = useUser();
 
   const projectId = generatePushId();
   const { projects, setProjects } = useProjectsValue();
@@ -20,7 +22,7 @@ export const AddProject = ({ shouldShow = false }) => {
       .add({
         projectId,
         name: projectName,
-        userId: 'xD54Q3dGwp58SSim6ndf',
+        userId: user.uid,
       })
       .then(() => {
         setProjects([...projects]);

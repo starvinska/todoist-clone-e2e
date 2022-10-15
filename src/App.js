@@ -1,40 +1,34 @@
 import React, { useState } from 'react';
-import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
 import { ModalsProvider } from '@mantine/modals';
+import { NotificationsProvider } from '@mantine/notifications';
 
 import { ProjectsProvider, SelectedProjectProvider } from './context';
-import { Auth } from './components/layout/Auth';
-import { SignIn } from './pages/SignIn';
-import { SignUp } from './pages/SignUp';
 import { lightTheme } from './styles/light-theme';
 import { darkTheme } from './styles/dark-theme';
 import { ThemeModeContext } from './context/themeMode/themeMode.context';
 import { UserProvider } from './context/user/user.context';
 import { Home } from './pages/Home';
+import { Auth } from './pages/Auth';
+import { PrivateRoute } from './components/PrivateRoute';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Home />,
+    element: (
+      <PrivateRoute>
+        <Home />
+      </PrivateRoute>
+    ),
   },
   {
-    path: '/auth',
-    element: <Auth />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/auth/sign-in" />,
-      },
-      {
-        path: '/auth/sign-in',
-        element: <SignIn />,
-      },
-      {
-        path: '/auth/sign-up',
-        element: <SignUp />,
-      },
-    ],
+    path: '/sign-in',
+    element: <Auth mode="sign-in" />,
+  },
+  {
+    path: '/sign-up',
+    element: <Auth mode="sign-up" />,
   },
 ]);
 
@@ -51,15 +45,17 @@ export const App = () => {
       }}
     >
       <MantineProvider theme={darkMode ? darkTheme : lightTheme} withGlobalStyles withNormalizeCSS>
-        <ModalsProvider>
-          <UserProvider>
-            <SelectedProjectProvider>
-              <ProjectsProvider>
-                <RouterProvider router={router} />
-              </ProjectsProvider>
-            </SelectedProjectProvider>
-          </UserProvider>
-        </ModalsProvider>
+        <NotificationsProvider>
+          <ModalsProvider>
+            <UserProvider>
+              <SelectedProjectProvider>
+                <ProjectsProvider>
+                  <RouterProvider router={router} />
+                </ProjectsProvider>
+              </SelectedProjectProvider>
+            </UserProvider>
+          </ModalsProvider>
+        </NotificationsProvider>
       </MantineProvider>
     </ThemeModeContext.Provider>
   );

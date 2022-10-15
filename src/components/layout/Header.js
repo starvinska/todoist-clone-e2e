@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { FaSun, FaMoon, FaPlus } from 'react-icons/fa';
+import { FaSun, FaMoon, FaPlus, FaSignOutAlt } from 'react-icons/fa';
+import { signOut } from 'firebase/auth';
 
 import { useThemeMode } from '../../hooks/useThemeMode/useThemeMode';
 import { useUser } from '../../hooks/useUser/useUser';
 import { AddTask } from '../AddTask';
+import { auth } from '../../firebase';
 
 export const Header = () => {
   const [shouldShowMain, setShouldShowMain] = useState(false);
@@ -34,11 +36,24 @@ export const Header = () => {
                 </button>
               </li>
             )}
+
             <li className="settings__darkmode">
               <button data-testid="dark-mode-action" aria-label="Darkmode on/off" type="button" onClick={toggleMode}>
                 {darkMode ? <FaSun /> : <FaMoon />}
               </button>
             </li>
+            {!!user && (
+              <li className="settings__logout">
+                <button
+                  type="button"
+                  onClick={() => {
+                    signOut(auth);
+                  }}
+                >
+                  <FaSignOutAlt size={18} />
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </nav>
